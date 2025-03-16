@@ -1,0 +1,37 @@
+button{
+    border-radius: 15px;
+    margin-left: 20px;
+    padding: 8px;
+}
+
+#myBtn1{
+    background-color: aqua;
+
+}
+#myBtn2{
+    background-color: rgb(0, 255, 21);
+
+}
+
+body{
+    background-image: linear-gradient(to right, rgb(142, 29, 40), rgb(86, 99, 146));
+}
+
+.main{
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+*{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.code{
+    background-color: lightgray;
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+}

@@ -1,0 +1,21 @@
+ html{
+    background-color : #121212;
+ } 
+
+ h1{
+    color: whitesmoke;
+    text-align: center;
+ } 
+
+#newTaskLabel{
+    color: white;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#newTask{
+    
+    margin-top: 20px;
+    margin-left: 100px;
+}
+ 

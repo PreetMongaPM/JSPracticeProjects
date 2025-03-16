@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="main">
+        <div>
+            <button id="myBtn1">#051937</button>
+            <button id="myBtn2">#008793</button>
+        </div>
+        <div>Copy your code below</div>
+        <div class="code">
+            background-image: linear-gradient(to right, rgb(142, 29, 40), rgb(86, 99, 146));
+        </div>
+    </div>
+    <script>
+        const firstBtn = document.getElementById("myBtn1");
+        const secBtn = document.getElementById("myBtn2");
+
+        const changeDivContent = document.querySelector('.code');
+
+        const arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+
+
+        let rgb1 = "#000";
+        let rgb2 = "#fff";
+
+
+
+        let changeCSS = () => {
+            let random = "#"
+            for (let i = 0; i < 6; i++) {
+                let randomIndx = Math.floor(Math.random() * arr.length);
+                random += arr[randomIndx];
+            }
+            return random;
+        }
+
+
+
+        firstBtn.addEventListener('click', () => {
+            rgb1 = changeCSS();
+            firstBtn.textContent = rgb1;
+            changeDivContent.textContent =
+                `background-image: linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            firstBut.style.backgroundColor = rgb1;
+        });
+
+        secBtn.addEventListener('click', () => {
+            rgb2 = changeCSS();
+            secBtn.textContent = rgb2;
+            changeDivContent.textContent =
+                `background-image: linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            secBut.style.backgroundColor = rgb2;
+        }
+        );
+
+        changeDivContent.addEventListener('click', () => {
+
+            navigator.clipboard.writeText(changeDivContent.innerHTML,);
+            alert(`Copied '${changeDivContent.innerHTML}' to clipboard`);
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

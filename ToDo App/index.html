@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = 'stylesheet' href="./styles.css">
+    <title>ToDo App</title>
+</head>
+<body>
+    <h1> TO DO App</h1>
+    <input class="inputField"> 
+    <button id = "addButton">Add</button>
+    <div class = "tasks">
+
+    </div>
+<script>
+    let inputField = document.querySelector(".inputField");
+    let buttonAction = document.getElementById("addButton");
+    let taskArea = document.querySelector(".tasks");
+
+    console.log(inputField);
+    console.log(buttonAction);
+    console.log(taskArea);
+    
+
+    buttonAction.addEventListener('click', ()=>
+    {
+        let taskItem = inputField.value;
+        let newTask = document.createElement("input");
+        newTask.type = 'checkbox';
+
+        newTask.name = 'checkBoxNewTask';
+        newTask.value = 'yes';
+        newTask.id = 'newTask'
+        // newTask.textContent = taskItem; 
+        const label = document.createElement('label');
+        label.setAttribute('for', 'newTask'); // Link label to checkbox
+        label.innerText = taskItem;
+        label.id = 'newTaskLabel';
+
+        let breakTag = document.createElement("br");
+        taskArea.append(label);
+        taskArea.append(newTask);
+        taskArea.append(breakTag);
+        inputField.value = "";
+
+    });
+
+    taskArea.addEventListener('click',()=>{
+
+        let currElem = event.target;
+
+        currElem.remove();
+        
+    });
+
+    
+
+</script>    
+
+</body>
+
+</html>
