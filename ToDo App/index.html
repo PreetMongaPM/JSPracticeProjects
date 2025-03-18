@@ -1,63 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = 'stylesheet' href="./styles.css">
+    <link rel='stylesheet' href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <title>ToDo App</title>
 </head>
+
 <body>
-    <h1> TO DO App</h1>
-    <input class="inputField"> 
-    <button id = "addButton">Add</button>
-    <div class = "tasks">
+    <div class="main">
+        <div class="heading"> To Do List</div>
+        <div>
+            <form>
+                <input class="inputField">
+                <button id="addButton">Add Task</button>
+            </form>
+        </div>
 
+
+        <div class="tasks">
+
+        </div>
     </div>
-<script>
-    let inputField = document.querySelector(".inputField");
-    let buttonAction = document.getElementById("addButton");
-    let taskArea = document.querySelector(".tasks");
+    <script>
+        let inputField = document.querySelector(".inputField");
+        let buttonAction = document.getElementById("addButton");
+        let taskArea = document.querySelector(".tasks");
 
-    console.log(inputField);
-    console.log(buttonAction);
-    console.log(taskArea);
-    
 
-    buttonAction.addEventListener('click', ()=>
-    {
-        let taskItem = inputField.value;
-        let newTask = document.createElement("input");
-        newTask.type = 'checkbox';
+        // console.log(inputField);
+        // console.log(buttonAction);
+        // console.log(taskArea);
 
-        newTask.name = 'checkBoxNewTask';
-        newTask.value = 'yes';
-        newTask.id = 'newTask'
-        // newTask.textContent = taskItem; 
-        const label = document.createElement('label');
-        label.setAttribute('for', 'newTask'); // Link label to checkbox
-        label.innerText = taskItem;
-        label.id = 'newTaskLabel';
 
-        let breakTag = document.createElement("br");
-        taskArea.append(label);
-        taskArea.append(newTask);
-        taskArea.append(breakTag);
-        inputField.value = "";
 
-    });
+        buttonAction.addEventListener('click', (e) => {
+            e.preventDefault();
+            addToDoList(e);
 
-    taskArea.addEventListener('click',()=>{
+        });
 
-        let currElem = event.target;
+        const getLocalData = () => {
+            return JSON.parse(localStorage.getItem('myTodo'));
+        };
 
-        currElem.remove();
+        let localTodoList = getLocalData() || [];
+
+        const localData = () => {
+            localTodoList.forEach((curTask) => {
+                createChild(curTask);
+            });
+
+        };
+
+        const createChild = (curTask) => {
+            const newTaskDiv = document.createElement("div");
+            newTaskDiv.classList.add("newTask");
+            newTaskDiv.innerHTML = `<li>${curTask}</li>
+                <button class = "deleteBtn">Delete Task</button>`;
+            taskArea.append(newTaskDiv);
+        }
         
-    });
+        const addToDoList = (e) => {
+            e.preventDefault();
 
-    
+            todoListTask = inputField.value.trim();
+            inputField.value = "";
 
-</script>    
+            if (todoListTask !== "" && !localTodoList.includes(todoListTask)) {
+                localTodoList.push(todoListTask);
+                createChild(todoListTask);
+                localStorage.setItem("myTodo", JSON.stringify(localTodoList));
+            }
+
+        };
+
+        const removeElement = (e) => {
+            const todoRemove = e.target;
+            const taskValue = todoRemove.previousElementSibling.innerText;
+
+            const parentOfTask = todoRemove.parentElement;
+
+            // parentOfTask.removeChild(todoRemove.previousElementSibling);
+            // parentOfTask.removeChild(todoRemove);
+
+            parentOfTask.remove(todoRemove);
+
+
+            localTodoList = localTodoList.filter((curElem) => {
+
+                return curElem !== taskValue;
+            });
+
+
+            localStorage.setItem("myTodo", JSON.stringify(localTodoList));
+        };
+
+
+        taskArea.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (e.target.classList.contains("deleteBtn")) {
+                removeElement(e);
+            }
+        });
+
+        localData();
+
+        // const breakTag = document.createElement("br");
+        // newTask.innerHTML = inputField.value;
+        // const newTask = document.createElement("p");
+        // newTaskDiv.appendChild(newTask);
+        // newTaskDiv.appendChild(deleteButton);
+        // taskArea.appendChild(newTaskDiv);
+        // taskArea.appendChild(breakTag);
+
+    </script>
 
 </body>
 
 </html>
+
+
+<!-- 
+// let taskItem = inputField.value;
+// let newTask = document.createElement("input");
+// newTask.type = 'checkbox';
+
+// newTask.name = 'checkBoxNewTask';
+// newTask.value = 'yes';
+// newTask.id = 'newTask'
+// // newTask.textContent = taskItem; 
+// const label = document.createElement('label');
+// label.setAttribute('for', 'newTask'); // Link label to checkbox
+// label.innerText = taskItem;
+// label.id = 'newTaskLabel';
+
+// let breakTag = document.createElement("br");
+// taskArea.append(label);
+// taskArea.append(newTask);
+// taskArea.append(breakTag);
+// inputField.value = ""; -->
