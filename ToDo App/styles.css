@@ -45,21 +45,31 @@ p{
     font-weight: bold;
     font-style: normal;
   }
+
+.tasks{
+    position: relative;
+}
+
+.newTask{
+    position: relative;
+    
+}
   
 .main{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     margin-bottom: 30px;
     align-items: center;
     height: 100vh;
+    
   } 
 
 /* #newTask{
     
     margin-top: 20px;
     margin-left: 100px;
-} */ */
+/* } */ 
 
 /* .newTask{
     margin-bottom: 5px;

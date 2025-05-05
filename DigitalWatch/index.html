@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class = "combined">
+            <div class="clockicon">
+                <img src="assets/images/time.png" alt="">
+            </div>
+            <div class="time"> 
+                <p id = "clock"></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const currentTime = ()=>{
+        let currTime = new Date().toLocaleTimeString();
+        document.getElementById("clock").innerText = currTime;
+    }
+
+    
+currentTime();
+
+setInterval(()=>{currentTime();}, 1000);
+
+
+    //Complex PM
+    // const timeDiv = document.querySelector(".time");
+    // const time = document.createElement('p');
+    // let currDate = new Date();
+    // let currTime = currDate.toLocaleTimeString();
+    // time.textContent = currTime;
+    // timeDiv.append(time);
+    
+    
+    // const repeatedFunc = ()=>{
+    //     let currMs = currDate.getTime(); // getTime is a fucntion of Date object
+    //     currMs += 1000;
+    //     console.log(currMs);
+    //     currDate.setTime(currMs);
+    //     currTime = currDate.toLocaleTimeString();
+    //     time.textContent = currTime;   
+    // }
+
+    // setInterval(repeatedFunc, 1000);
+
+
+</script>
+</html>

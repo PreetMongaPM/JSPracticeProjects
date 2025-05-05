@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="outline">
+        <h1>Stop Watch</h1>
+        <div class="display">
+            <div class="clockFrame">
+                <div class="timer">
+                    <p id="stopWatch"></p>
+                </div>
+                <div class="buttons">
+                    <button id="start">Start</button>
+                    <button id="stop">Stop</button>
+                    <button id="reset">Reset</button>
+                    <button id="clearTime">Clear Time</button>
+                    <button id="getTime">Get Time</button>
+                </div>
+            </div>
+            <div class="output">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        let startBtn = document.getElementById("start");
+        let stopBtn = document.getElementById("stop");
+        let resetBtn = document.getElementById("reset");
+        let clearTimeBtn = document.getElementById("clearTime");
+        let getTimeBtn = document.getElementById("getTime");
+
+        let currTime = new Date();
+
+        // let startCount = 0; for 0 1  2 
+
+
+        let resetTime = () => {
+            currTime.setHours(0, 0, 0, 0);
+            // startTime = 0; agar 0 1 2 
+            document.getElementById("stopWatch").innerText = currTime.toLocaleTimeString('en-GB');
+
+            // document.getElementById("stopWatch").innerText = startTime;
+        };
+
+        resetTime();
+        let startTime;
+
+        let f = true;
+
+        let intervalId; //global scope chaiye aage
+
+        let clock = () => {
+
+        if(f)
+
+        {
+
+            intervalId = setInterval(()=>{
+                let currentMs = currTime.getTime();
+                
+                currentMs += 1000;
+                currTime.setTime(currentMs);
+                
+                document.getElementById("stopWatch").innerText = currTime.toLocaleTimeString('en-GB');
+                
+            }, 1000);
+            f = false;
+
+            
+        }
+            // document.getElementById("stopWatch").innerText = startCount++; Sir is showing 1, 2, 3 direct
+        }
+
+
+
+        let outputDiv = document.querySelector(".output");
+
+        // All Button Reference Taken
+
+        startBtn.addEventListener('click', (e) => {
+            // e.preventDefault(); NOt using form here
+            // if (f) {
+            //     startTime = setInterval(clock, 1000);
+
+            // }
+            clock();
+        });
+
+        stopBtn.addEventListener("click", (e) => {
+            clearInterval(intervalId);
+        });
+        resetBtn.addEventListener("click", (e) => {
+            resetTime();
+            clearInterval(intervalId);
+            f = true;
+        });
+
+        clearTimeBtn.addEventListener("click", (e) => {
+            // while (outputDiv.firstChild) {
+            //     outputDiv.removeChild(outputDiv.firstChild);
+            // }
+            outputDiv.innerHTML = "";
+        });
+        getTimeBtn.addEventListener("click", (e) => {
+            let time = document.getElementById("stopWatch");
+            let showTime = document.createElement("p");
+            showTime.innerText = `Current time is ${time.innerText}`;
+            outputDiv.append(showTime);
+        });
+
+        //Basic change with sir was he used 0 1 2, i used 00:00:00 and one more thing he stored the value in global 
+        //like startCoutn so it was easily accessible
+        //Agar vo stop pe value show karni hui toh get time waale ka ek function 
+        //call it in stop as well
+
+    </script>
+
+</body>
+
+</html>

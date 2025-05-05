@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="main">
+    </div>
+    <div class = "print"></div>
+    <script>
+
+
+const createPeriodicTableElement = (count) =>{
+            const ptElem =  document.createElement("div");
+            ptElem.classList.add("child");
+            ptElem.innerText = `Elem${count}`;
+            ptElem.setAttribute("data-atomic-number", count);
+            ptElem.setAttribute("data-element-name", `Element ${count}`);
+            return ptElem;
+}
+        
+        const mainDiv = document.querySelector(".main");
+        const printDiv = document.querySelector(".print");
+        
+        const createPeriodicTable = ()=>{for (let i = 1; i <= 50; i++) {
+            const elem = createPeriodicTableElement(i);
+            mainDiv.append(elem);
+        }
+    }
+    
+    createPeriodicTable();
+
+    const handleClickEvent = (event)=>{
+        const currELem = event.target;
+        const atomicNumber = currELem.getAttribute("data-atomic-number")
+        const atomicName = currELem.getAttribute("data-element-name");
+
+        alert(`Atomic Number : ${atomicNumber}\nElement Name : ${atomicName}`);
+    }
+    
+    mainDiv.addEventListener('click', handleClickEvent); 
+    </script>
+</body>
+
+</html>
